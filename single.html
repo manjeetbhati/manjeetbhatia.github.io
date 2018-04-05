@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    
+    <!-- Meta Tag -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO -->
+    <meta name="description" content="150 words">
+    <meta name="author" content="uipasta">
+    <meta name="url" content="http://www.yourdomainname.com">
+    <meta name="copyright" content="company name">
+    <meta name="robots" content="index,follow">
+    
+    
+    <title>DevBlog - Personal Blog Template</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="144x144" type="image/x-icon" href="images/favicon/apple-touch-icon.png">
+    
+    <!-- All CSS Plugins -->
+    <link rel="stylesheet" type="text/css" href="css/plugin.css">
+    
+    <!-- Main CSS Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    
+    <!-- Google Web Fonts  -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,300,500,600,700">
+    
+    <!-- Syntax Highlighter  -->
+    <link rel="stylesheet" type="text/css" href="css/syntax/shCore.css">
+    <link rel="stylesheet" type="text/css" href="css/syntax/shThemeDefault.css">
+    
+    
+    <!-- HTML5 shiv and Respond.js support IE8 or Older for HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+	   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+
+  </head>
+
+ <body>
+
+	
+     
+	 <!-- Preloader Start -->
+     <div class="preloader">
+	   <div class="rounder"></div>
+      </div>
+      <!-- Preloader End -->
+      
+      
+    
+    
+    <div id="main">
+        <div class="container">
+            <div class="row">
+            	
+               
+                 
+                 <!-- About Me (Left Sidebar) Start -->
+                 <div class="col-md-3">
+                   <div class="about-fixed">
+                    
+                     <div class="my-pic">
+                        <img src="images/blog/manjeet.jpg" alt="">
+                        <a href="javascript:void(0)" class="collapsed" data-target="#menu" data-toggle="collapse"><i class="icon-menu menu"></i></a>
+                         <div id="menu" class="collapse">
+                           <ul class="menu-link">
+                               <li><a href="about.html">About</a></li>
+                               <li><a href="work.html">Work</a></li>
+                            </ul>
+                         </div>
+                        </div>
+                      
+                      
+                      
+                      <div class="my-detail">
+                    	
+                        <div class="white-spacing">
+                            <h1>Manjeet S. Bhatia</h1>
+                            <span>Cloud SW Engineer</span>
+                        </div> 
+                       
+                       <ul class="social-icon">
+                         <li><a href="https://twitter.com/cloudpunjab" target="_blank" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                         <li><a href="#" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                         <li><a href="https://github.com/manjeetbhatia" target="_blank" class="github"><i class="fa fa-github"></i></a></li>
+                        </ul>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- About Me (Left Sidebar) End -->
+                
+                
+                
+                
+                 
+                 <!-- Blog Post (Right Sidebar) Start -->
+                 <div class="col-md-9">
+                    <div class="col-md-12 page-body">
+                    	<div class="row">
+                    		
+                            
+                            <div class="sub-title">
+                           		<a href="index.html" title="Go to Home Page"><h2>Back Home</h2></a>
+                                <a href="about.html" class="smoth-scroll"><i class="icon-bubbles"></i></a>
+                             </div>
+                            
+                            
+                            <div class="col-md-12 content-page">
+                              <div class="col-md-12 blog-post">
+                            	
+                                
+                                <!-- Post Headline Start -->
+                                <div class="post-title">
+                                    <h1>Avoid Dependency versions conflicts While running unit tests locally for an OpenStack Project</h1> 
+                                   </div>
+                                   <!-- Post Headline End -->
+                                    
+                                    
+                                <!-- Post Detail Start -->
+                                <div class="post-info">
+                                    <span>April 4, 2018 / by <a href="#" target="_blank">Manjeet S. Bhatia</a></span>
+                                   </div>
+                                   <!-- Post Detail End -->
+                                    
+                                    
+                                   <p>Running unit test for project with modified versioned of dependency can be tricky. OpenStack has requirements project where all the upper constraints for version of each project used are defined. When the unit tests or any tests are fired the first thing done is creating a virtual environment and then installing all the dependencies defined in requirement.txt and test-requirements.txt of the project repo. Version of each dependency is chosen from upper-constraints.txt of requiremnts repo.</p> 
+                                
+                                  
+                                   <p>To run tests for project with modified dependency requirements.txt and tox.ini of project needs to be modified..</p>
+                                  
+                                  <div class="post-title">
+                                    <h2>Edit tox.ini</h2> 
+                                   </div>
+                                   
+                                   
+                                   <p>I have to run tests for neutron with modified neutron-lib and networking-odl. In tox.ini there will be install_command = {toxinidir}/tools/tox_install.sh </b> {env:UPPER_CONSTRAINTS_FILE:https://git.openstack.org/cgit/openstack/ </b> requirements/plain/upper-constraints.txt} {opts} {packages} in [testenv].</p> 
+                                     
+                                  
+                                  
+                                  
+                                  <!-- Post Blockquote (Italic Style) Start -->
+                                  <blockquote class="margin-top-40 margin-bottom-40">
+                                    <p>1. wget https://git.openstack.org/cgit/openstack/requirements/plain/upper-constraints.txt</p>
+                                    <p>2.  edit replace 'neutron-lib>=some version' with -e file:///opt/stack/new/neutron-lib#egg=neutron-lib </p>
+                                    <p> Note: file path could be different based on where you have neutron-lib located locally. </p> 
+                                    <p>3. Replace UPPER_CONSTRAINTS_FILE:'local_file_path' in tox.ini with new upper-constraints.txt</p>
+                                    <p>4. Edit requirements.txt from neutron repo to replace 'neutron-lib>="some version" with -e file:///opt/stack/new/neutron-lib#egg=neutron-lib </p>
+                                    <p> Run Tests tox -e py27/pep8/** </p>
+                                   </blockquote>
+                                   <!-- Post Blockquote (Italic Style) End -->
+                                   
+                                   
+                                  
+                                  
+                                  
+                                    
+                                </div>    
+                             </div>
+                              
+                         </div>
+                         
+                       <!-- Footer Start -->
+                       <div class="col-md-12 page-body margin-top-50 footer">
+                          <footer>
+                          <ul class="menu-link">
+                               <li><a href="index.html">Home</a></li>
+                               <li><a href="about.html">About</a></li>
+                               <li><a href="work.html">Work</a></li>
+                            </ul>
+                            
+                          <p>© Copyright 2018. All rights reserved</p>
+						  
+                         </footer>
+                       </div>
+                       <!-- Footer End -->
+                     
+                     
+                  </div>
+                  <!-- Blog Post (Right Sidebar) End -->
+                
+            </div>
+         </div>
+      </div>
+    
+    
+    
+     
+     <!-- Endpage Box (Popup When Scroll Down) Start -->
+     <div id="scroll-down-popup" class="endpage-box">
+       <h4>Read Also</h4>
+       <a href="#">How to make your company website based on bootstrap framework...</a>
+      </div>
+      <!-- Endpage Box (Popup When Scroll Down) End -->
+      
+    
+    
+    
+    <!-- Back to Top Start -->
+    <a href="#" class="scroll-to-top"><i class="fa fa-long-arrow-up"></i></a>
+    <!-- Back to Top End -->
+    
+    
+    <!-- All Javascript Plugins  -->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/plugin.js"></script>
+    
+    <!-- Main Javascript File  -->
+    <script type="text/javascript" src="js/scripts.js"></script>
+    
+    <!-- Syntax Highlighter Javascript File  -->
+    <script type="text/javascript" src="js/syntax/shCore.js"></script>
+    <script type="text/javascript" src="js/syntax/shBrushCss.js"></script>
+    <script type="text/javascript" src="js/syntax/shBrushJScript.js"></script>
+    <script type="text/javascript" src="js/syntax/shBrushPerl.js"></script>
+    <script type="text/javascript" src="js/syntax/shBrushPhp.js"></script>
+    <script type="text/javascript" src="js/syntax/shBrushPlain.js"></script>
+    <script type="text/javascript" src="js/syntax/shBrushPython.js"></script>
+    <script type="text/javascript" src="js/syntax/shBrushRuby.js"></script>
+    <script type="text/javascript" src="js/syntax/shBrushSql.js"></script>
+    <script type="text/javascript" src="js/syntax/shBrushVb.js"></script>
+    <script type="text/javascript" src="js/syntax/shBrushXml.js"></script>
+    
+	<!-- Syntax Highlighter Call Function -->
+	<script type="text/javascript">
+		SyntaxHighlighter.config.clipboardSwf = 'js/syntax/clipboard.swf';
+		SyntaxHighlighter.all();
+	</script>
+
+    
+   </body>
+ </html>
